@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box"></div>
+  <button id="btn">按钮</button>
+
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background: rgba(100, 100, 255, 0.5);
+    }
+
+    #box.ml {
+      margin-left: 100px;
+    }
+  </style>
+
+  <script>
+
+    const box = document.getElementById('box')
+    const btn = document.getElementById('btn')
+
+    btn.addEventListener('click', () => {
+      const x1 = box.getBoundingClientRect().x
+
+      box.classList.add('ml')
+
+      const x2 = box.getBoundingClientRect().x
+
+      console.log(`x1: ${x1} -> x2: ${x2}`)
+
+      // let start = Date.now()
+      // while (Date.now() - start < 5000) {
+      //   //
+      // }
+
+
+      box.style.transform = `translateX(${x1 - x2}px)`
+
+      requestAnimationFrame(() => {
+        box.style.transition = 'all ease 1s'
+        box.style.transform = ''
+      })
+    })
+  </script>
+</body>
+
+</html>

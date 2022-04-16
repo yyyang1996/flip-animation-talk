@@ -1,0 +1,28 @@
+{
+  "extends": "@yyyanghj/tsconfig",
+  "compilerOptions": {
+    "target": "es6",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "noEmit": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "types": [
+      "unplugin-icons/types/react",
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}
