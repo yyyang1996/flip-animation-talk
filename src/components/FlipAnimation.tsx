@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useLayoutEffect } from 'react'
 import { flip, AnimationType } from '../flip'
 import { useFlipConfig } from './FlipAnimationProvider'
+import { getFontStyle } from '../utils'
 
 type Props = {
   flipId: string
@@ -28,6 +29,7 @@ function FlipAnimation(props: Props) {
         width: boundRect.width,
         height: boundRect.height,
       },
+      font: getFontStyle(container),
     }
 
     if (oldConfig) {

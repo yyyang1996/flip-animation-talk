@@ -15,8 +15,8 @@ function Home() {
   return (
     <div style={style}>
       <header className="flex px-4 pt-10 pb-4">
-        <FlipAnimation flipId="title">
-          <h1 className="title" style={{ fontSize: 48 }}>
+        <FlipAnimation flipId="title" animationType="font">
+          <h1 className="title" style={{ fontSize: 48, height: 48 }}>
             Settings
           </h1>
         </FlipAnimation>

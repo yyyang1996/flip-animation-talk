@@ -25,8 +25,8 @@ function Form() {
         <div className="flex h-12 w-12 justify-center items-center" onClick={() => navigate(-1)}>
           <IconLucideChevronLeft className=" text-[32px]" />
         </div>
-        <FlipAnimation flipId="title">
-          <h1 className="title" style={{ fontSize: 18 }}>
+        <FlipAnimation flipId="title" animationType="font">
+          <h1 className="title" style={{ fontSize: 18, height: 26, color: '#306ee8' }}>
             Settings
           </h1>
         </FlipAnimation>
