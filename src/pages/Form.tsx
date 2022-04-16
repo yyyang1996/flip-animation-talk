@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import { useNavigate, useMatch } from 'react-router-dom'
 import IconLucideChevronLeft from '~icons/lucide/chevron-left'
 import { getRandomHeight } from '../utils'
 import FlipAnimation from '../components/FlipAnimation'
 
-const heights = Array.from({ length: 5 }, () => getRandomHeight())
+const heights = Array.from({ length: 10 }, () => getRandomHeight())
 
 const style: React.CSSProperties = {
   position: 'absolute',
@@ -19,6 +19,10 @@ const style: React.CSSProperties = {
 function Form() {
   const match = useMatch('/form')
   const navigate = useNavigate()
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div style={style}>

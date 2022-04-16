@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { getRandomHeight } from '../utils'
 import { useNavigate, useMatch } from 'react-router-dom'
 import FlipAnimation from '../components/FlipAnimation'
 
-const heights = Array.from({ length: 5 }, () => getRandomHeight())
-
-const style: React.CSSProperties = { position: 'relative', zIndex: 1, background: '#ededef' }
+const heights = Array.from({ length: 20 }, () => getRandomHeight())
 
 function Home() {
+  const isFixed = useFixed()
+  const flipRef = useRef<any>()
   const match = useMatch('/')
 
   const navigate = useNavigate()
-
   const goForm = () => navigate('/form')
+
+  useEffect(() => {
+    flipRef.current.updateConfig()
+  }, [isFixed])
+
+  const style: React.CSSProperties = {
+    position: 'relative',
+    zIndex: 1,
+    background: '#ededef',
+    paddingTop: isFixed ? 80 : 0,
+  }
 
   return (
     <div style={style}>
@@ -20,10 +30,10 @@ function Home() {
         style={{
           visibility: !match ? 'hidden' : 'visible',
         }}
-        className="flex px-4 pt-10 pb-4"
+        className={`flex px-4 pt-10 pb-4 ${isFixed ? 'fixed-style' : ''}`}
       >
-        <FlipAnimation flipId="title" animationType="font">
-          <h1 className="title" style={{ fontSize: 48, height: 48 }}>
+        <FlipAnimation ref={flipRef} flipId="title" animationType="font">
+          <h1 className="title" style={{ fontSize: isFixed ? 18 : 48, height: isFixed ? 26 : 48 }}>
             Settings
           </h1>
         </FlipAnimation>
@@ -33,6 +43,37 @@ function Home() {
       })}
     </div>
   )
+}
+
+let scrollTop = 0
+
+function useFixed() {
+  const [isFixed, setIsFixed] = useState(scrollTop > 40)
+
+  useEffect(() => {
+    const handler = () => {
+      if (document.documentElement.scrollTop > 0 || scrollTop < 40) {
+        // 页面跳转前记住滚动条高度, 跳转后会突然变成0, 要记住变成0之前的值
+        scrollTop = document.documentElement.scrollTop
+      }
+
+      if (document.documentElement.scrollTop > 40) {
+        if (!isFixed) {
+          setIsFixed(true)
+        }
+      } else if (isFixed) {
+        setIsFixed(false)
+      }
+    }
+
+    window.addEventListener('scroll', handler)
+
+    return () => {
+      window.removeEventListener('scroll', handler)
+    }
+  }, [isFixed])
+
+  return isFixed
 }
 
 export default Home

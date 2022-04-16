@@ -21,7 +21,8 @@ class AnimateRoutesClass extends React.Component<Props> {
     const { navigationType } = this.props
 
     if (navigationType === 'POP') {
-      leftIn(node)
+      // 使用 fixed 时不能用 translate, 不然会变成 absolute
+      // leftIn(node)
     } else {
       rightIn(node)
     }
