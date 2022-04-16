@@ -32,7 +32,7 @@ function Home() {
         }}
         className={`flex px-4 pt-10 pb-4 ${isFixed ? 'fixed-style' : ''}`}
       >
-        <FlipAnimation ref={flipRef} flipId="title" animationType="font">
+        <FlipAnimation ref={flipRef} flipId="settings" animationType="font">
           <h1 className="title" style={{ fontSize: isFixed ? 18 : 48, height: isFixed ? 26 : 48 }}>
             Settings
           </h1>

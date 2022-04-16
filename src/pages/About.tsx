@@ -12,12 +12,12 @@ const style: React.CSSProperties = {
   top: 0,
   width: '100vw',
   height: '100vh',
-  zIndex: 2,
+  zIndex: 3,
   background: '#ededef',
 }
 
-function Form() {
-  const match = useMatch('/form')
+function About() {
+  const match = useMatch('/about')
   const navigate = useNavigate()
 
   useLayoutEffect(() => {
@@ -33,24 +33,20 @@ function Form() {
         <div className="flex h-12 w-12 justify-center items-center" onClick={() => navigate(-1)}>
           <IconLucideChevronLeft className=" text-[32px]" />
         </div>
-        <FlipAnimation flipId="settings" animationType="font">
+        <FlipAnimation flipId="general" animationType="font">
           <h1 className="title" style={{ fontSize: 18, height: 26, color: '#306ee8' }}>
-            Settings
+            General
           </h1>
         </FlipAnimation>
 
-        <FlipAnimation flipId="general" animationType="font">
-          <div style={{ marginLeft: 20, fontSize: 24, color: '#00000' }}>General</div>
-        </FlipAnimation>
+        <div style={{ marginLeft: 20, fontSize: 24, color: '#00000' }}>About</div>
       </header>
 
       {heights.map((height, i) => {
-        return (
-          <div key={i} style={{ height }} className="card" onClick={() => navigate('/about')}></div>
-        )
+        return <div key={i} style={{ height }} className="card"></div>
       })}
     </div>
   )
 }
 
-export default Form
+export default About
