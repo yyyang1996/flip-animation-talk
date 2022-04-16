@@ -13,11 +13,11 @@ function Home() {
 
   return (
     <div style={style}>
-      <header className="h-[100px] px-4 pt-10">
+      {/* <header className="flex px-4 pt-10 pb-4">
         <h1 className="title" style={{ fontSize: 48 }}>
           Settings
         </h1>
-      </header>
+      </header> */}
       {heights.map((height, i) => {
         return <div key={i} style={{ height }} className="card" onClick={goForm}></div>
       })}

@@ -35,12 +35,12 @@ h1 {
 
 .title {
   display: inline-flex;
-  background: #000;
+  /* background: #000; */
   font-weight: 500;
 }
 
 .card {
-  margin: 24px 16px;
+  margin: 0 16px 24px;
   border-radius: 12px;
   background-color: #fff;
   min-height: 40px;
