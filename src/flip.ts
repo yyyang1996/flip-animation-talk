@@ -1,4 +1,5 @@
 import { PAGE_TRANSITION_DURATION } from './constants'
+import { pushTask } from './task'
 
 export type AnimationType = 'size' | 'font'
 
@@ -41,13 +42,15 @@ export function flip(
   console.info('keyframes', keyframes)
 
   return new Promise<void>(resolve => {
-    container
-      .animate(keyframes, {
-        duration: PAGE_TRANSITION_DURATION,
-        easing: 'ease',
-      })
-      .addEventListener('finish', () => {
-        resolve()
-      })
+    pushTask(() => {
+      container
+        .animate(keyframes, {
+          duration: PAGE_TRANSITION_DURATION,
+          easing: 'ease',
+        })
+        .addEventListener('finish', () => {
+          resolve()
+        })
+    })
   })
 }

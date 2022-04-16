@@ -1,7 +1,8 @@
-import React, { useRef, useEffect, useLayoutEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { flip, AnimationType } from '../flip'
 import { useFlipConfig } from './FlipAnimationProvider'
 import { getFontStyle } from '../utils'
+import { flushTasks } from '../task'
 
 type Props = {
   flipId: string
@@ -13,7 +14,7 @@ function FlipAnimation(props: Props) {
   const elRef = useRef<HTMLDivElement | null>(null)
   const { getFlipConfig, setFlipConfig } = useFlipConfig()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!elRef.current) {
       return
     }
@@ -33,7 +34,20 @@ function FlipAnimation(props: Props) {
     }
 
     if (oldConfig) {
-      flip(oldConfig, newConfig, container, animationType)
+      flip(oldConfig, newConfig, container, animationType).then(() => {
+        const boundRect = container.getBoundingClientRect()
+        setFlipConfig(flipId, {
+          layout: {
+            x: boundRect.x,
+            y: boundRect.y,
+            width: boundRect.width,
+            height: boundRect.height,
+          },
+          font: getFontStyle(container),
+        })
+      })
+
+      flushTasks()
     }
 
     setFlipConfig(flipId, newConfig)

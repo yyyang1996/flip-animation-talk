@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useMatch } from 'react-router-dom'
 import IconLucideChevronLeft from '~icons/lucide/chevron-left'
 import { getRandomHeight } from '../utils'
 import FlipAnimation from '../components/FlipAnimation'
@@ -17,11 +17,15 @@ const style: React.CSSProperties = {
 }
 
 function Form() {
+  const match = useMatch('/form')
   const navigate = useNavigate()
 
   return (
     <div style={style}>
-      <header className="flex py-4 px-4 items-center">
+      <header
+        style={{ visibility: !match ? 'hidden' : 'visible' }}
+        className="flex py-4 px-4 items-center"
+      >
         <div className="flex h-12 w-12 justify-center items-center" onClick={() => navigate(-1)}>
           <IconLucideChevronLeft className=" text-[32px]" />
         </div>
